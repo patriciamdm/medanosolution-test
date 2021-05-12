@@ -11,9 +11,9 @@ const Footer = () => {
 
     return (
         <AppBar position="static" style={{backgroundColor: 'gray'}}>
-            <Toolbar>
-                <Typography variant="body">Copyright © 2021. Developed by Patricia Muñoz de Dios</Typography>
-                <Fab aria-label="scroll back to top" onClick={handleClick} edge="end" color="secondary" size="small" style={{position: 'absolute', right: '20px', bottom: '12px'}}>
+            <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+                <Typography variant="body1">Copyright © 2021. Developed by Patricia Muñoz de Dios</Typography>
+                <Fab aria-label="scroll back to top" onClick={handleClick} color="secondary" size="small">
                     <KeyboardArrowUpIcon />
                 </Fab>
             </Toolbar>
