@@ -14,17 +14,19 @@ const Navigation = () => {
         <>
             <AppBar position="static">
                 <Toolbar id="back-to-top-anchor">
-                    <IconButton aria-label="open side menu" onClick={handleOpen} edge="start">
+                    <IconButton aria-label="open side menu" color="inherit" onClick={handleOpen} edge="start">
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" style={{margin: '0px 12px'}}>Pokemon API</Typography>
+                    <Typography variant="h6" style={{ margin: '0px 12px' }}>
+                        <Link to="/" style={{textDecoration: 'none', color: 'white', fontSize: '1.3rem'}}>Pokemon API</Link>
+                    </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer anchor="left" open={drawer} onClose={handleClose}>
                 <List>
-                    <ListItem><Link to="/" onClick={handleClose}>Pokemons</Link></ListItem>    
-                    <ListItem><Link to="/generations" onClick={handleClose}>Generations</Link></ListItem>    
-                    <ListItem><Link to="/evolutions" onClick={handleClose}>Evolutions</Link></ListItem>    
+                    <ListItem><Link to="/" onClick={handleClose} className="link-edit">Pokemons</Link></ListItem>    
+                    <ListItem><Link to="/generations" onClick={handleClose} className="link-edit">Generations</Link></ListItem>    
+                    <ListItem><Link to="/evolutions" onClick={handleClose} className="link-edit">Evolutions</Link></ListItem>    
                 </List>
             </Drawer>
         </>

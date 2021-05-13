@@ -7,22 +7,28 @@ import Navigation from './components/layout/Navigation'
 import Footer from './components/layout/Footer'
 
 import PokemonsList from './components/content/pokemons/Pokemons-list'
+import PokemonDetails from './components/content/pokemons/Pokemon-dets'
 import Generations from './components/content/Generations'
 import Evolutions from './components/content/Evolutions'
 
+import PokemonState from './context/pokemons/pokemonState'
+
 function App() {
   return (
-    <Router>
-      <Navigation />
-      <main>
-        <Switch>
-          <Route exact path="/" component={PokemonsList} />
-          <Route exact path="/generations" component={Generations} />
-          <Route exact path="/evolutions" component={Evolutions} />
-        </Switch>
-      </main>
-      <Footer />
-    </Router>
+    <PokemonState>
+      <Router>
+        <Navigation />
+        <main>
+          <Switch>
+            <Route exact path="/" component={PokemonsList} />
+            <Route exact path="/pokemon/:id" render={props => <PokemonDetails {...props}/>} />
+            <Route exact path="/generations" component={Generations} />
+            <Route exact path="/evolutions" component={Evolutions} />
+          </Switch>
+        </main>
+        <Footer />
+      </Router>
+    </PokemonState>
   );
 }
 

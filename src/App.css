@@ -6,4 +6,12 @@ body {
 main {
     min-height: 85vh;
     margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.link-edit {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: black;
 }

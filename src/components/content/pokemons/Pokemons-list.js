@@ -1,40 +1,41 @@
-import React, { useState } from 'react';
-import { Container, Grid } from '@material-ui/core';
+import React, { useState, useContext, useEffect } from 'react';
+import { Container, Grid, Typography } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab'
+
 //import { Link } from 'react-router-dom';
 
-import PokemonCard from './pokemon-card'
+import PokemonContext from '../../../context/pokemons/pokemonContext'
+
+import PokemonCard from './Pokemon-card'
 
 const PokemonsList = () => {
 
-    const [pokemons, setPokemons] = useState([
-    {
-      "name": "unown",
-      "url": "https://pokeapi.co/api/v2/pokemon/201/"
-    },
-    {
-      "name": "wobbuffet",
-      "url": "https://pokeapi.co/api/v2/pokemon/202/"
-    },
-    {
-      "name": "girafarig",
-      "url": "https://pokeapi.co/api/v2/pokemon/203/"
-    },
-    {
-      "name": "pineco",
-      "url": "https://pokeapi.co/api/v2/pokemon/204/"
-    },
-    {
-      "name": "forretress",
-      "url": "https://pokeapi.co/api/v2/pokemon/205/"
-    }])
+  const pokemonContext = useContext(PokemonContext)
+  const { pokemons, alertmsg, getPokemons } = pokemonContext
 
-    return (
-        <Container>
-            <Grid container spacing={3}>
-                {pokemons.map((elm, idx) => <PokemonCard key={idx} info={elm}/>)}
-            </Grid>
-        </Container>
-    )
+  const [alert, showAlert] = useState(false)
+  
+  useEffect(() => {
+    if (alertmsg) showAlert(true)
+    getPokemons()
+    // eslint-disable-next-line
+  }, [alertmsg])
+
+  if (pokemons.length === 0) return <Container><Typography>Loading Pokemon...</Typography></Container>
+
+  return (
+    <Container>
+      {alert
+        &&
+        <Alert severity="error" style={{marginBottom: '20px'}}>
+          <AlertTitle>Error</AlertTitle>
+          {alertmsg}
+        </Alert>}
+        <Grid container spacing={3}>
+            {pokemons.map((elm, idx) => <PokemonCard key={idx} info={elm}/>)}
+        </Grid>
+    </Container>
+  )
 }
 
 export default PokemonsList
