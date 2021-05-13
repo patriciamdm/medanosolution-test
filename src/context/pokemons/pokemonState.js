@@ -3,7 +3,7 @@ import React, { useReducer } from 'react'
 import PokemonContext from './pokemonContext'
 import PokemonReducer from './pokemonReducer'
 
-import { GET_ONEPOKEMON, GET_POKEMONS, API_ERROR, MOVE_PAGE } from '../../types'
+import { GET_ONEPOKEMON, GET_POKEMONS, API_ERROR } from '../../types'
 
 import apiHandler from '../../services/api.service'
 
@@ -31,10 +31,10 @@ const PokemonState = props => {
         }
     }
 
-    const getOnePokemon = async (id) => {
+    const getOnePokemon = async (info) => {
         try {
-            const response = await apiHandler.get(`pokemon/${id}`)
-            dispatch({type: GET_ONEPOKEMON, payload: response.data})
+            const response = await apiHandler.get(`pokemon/${info}`)
+            dispatch({ type: GET_ONEPOKEMON, payload: response.data })
         } catch (err) {
             const alert = { msg: err.response.data.msg}
             dispatch({ type: API_ERROR, payload: alert })
@@ -43,8 +43,13 @@ const PokemonState = props => {
 
     const changePage = async (page) => {
         const movepage = page.slice(26)
-        dispatch({ MOVE_PAGE, payload: movepage })
-        getPokemons()
+        try {
+            const response = await apiHandler.get(movepage)
+            dispatch({ type: GET_POKEMONS, payload: response.data })
+        } catch (err) {
+            const alert = { msg: err.response.data.msg}
+            dispatch({ type: API_ERROR, payload: alert })
+        }
     } 
 
     return (

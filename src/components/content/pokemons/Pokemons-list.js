@@ -1,39 +1,53 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Container, Grid, Typography } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab'
-
-//import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react'
+import { Container, Grid, Typography } from '@material-ui/core'
 
 import PokemonContext from '../../../context/pokemons/pokemonContext'
 
 import PokemonCard from './Pokemon-card'
+import AlertMsg from '../../layout/Alert'
+import SearchBar from '../../layout/Search-bar'
+import Pager from '../../layout/Pager'
+
 
 const PokemonsList = () => {
 
   const pokemonContext = useContext(PokemonContext)
-  const { pokemons, alertmsg, getPokemons } = pokemonContext
+  const { pokemons, alertmsg, getPokemons, changePage, next, previous, page } = pokemonContext
 
+  const [filterPokemons, setFilterPokemons] = useState(pokemons)
+  const [search, setSearch] = useState('')
   const [alert, showAlert] = useState(false)
+
+  const searchBy = value => {
+    const filtered = pokemons.filter(elm => elm.name.toLowerCase().includes(value.toLowerCase()))
+    setFilterPokemons(filtered)
+  } 
   
   useEffect(() => {
     if (alertmsg) showAlert(true)
     getPokemons()
     // eslint-disable-next-line
-  }, [alertmsg])
+  }, [alertmsg, page])
+
+  useEffect(() => {setFilterPokemons(pokemons)}, [pokemons])
+
+  useEffect(() => {
+    searchBy(search)
+    // eslint-disable-next-line
+  }, [search])
 
   if (pokemons.length === 0) return <Container><Typography>Loading Pokemon...</Typography></Container>
 
   return (
     <Container>
-      {alert
-        &&
-        <Alert severity="error" style={{marginBottom: '20px'}}>
-          <AlertTitle>Error</AlertTitle>
-          {alertmsg}
-        </Alert>}
-        <Grid container spacing={3}>
-            {pokemons.map((elm, idx) => <PokemonCard key={idx} info={elm}/>)}
-        </Grid>
+      {alert && <AlertMsg msg={alertmsg} />}
+      <div style={{display: 'flex', marginBottom: '20px'}}>
+        <SearchBar search={search} setSearch={setSearch} />
+        <Pager changePage={changePage} next={next} previous={previous} page={page}/>
+      </div>
+      <Grid container spacing={3}>
+          {filterPokemons.map((elm, idx) => <PokemonCard key={idx} info={elm}/>)}
+      </Grid>
     </Container>
   )
 }

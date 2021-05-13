@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Container, Typography, Avatar } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab'
-
-//import { Link } from 'react-router-dom';
+import { Container, Typography, Avatar, Grid } from '@material-ui/core';
 
 import PokemonContext from '../../../context/pokemons/pokemonContext'
+
+import AlertMsg from '../../layout/Alert'
 
 
 const PokemonDetails = (props) => {
@@ -14,31 +13,75 @@ const PokemonDetails = (props) => {
 
     const [alert, showAlert] = useState(false)
 
-    const pokeId = props.match.params.id
-
     useEffect(() => {
         if (alertmsg) showAlert(true)
-        getOnePokemon(pokeId)
+        getOnePokemon(props.match.params.name)
         // eslint-disable-next-line
     }, [alertmsg])
 
     if (!pokemon) return <Container><Typography>Loading Pokemon...</Typography></Container>
 
-    return (
-        <Container>
-            {alert
-                &&
-                <Alert severity="error" style={{marginBottom: '20px'}}>
-                    <AlertTitle>Error</AlertTitle>
-                    {alertmsg}
-                </Alert>}
-            <div style={{display: 'flex'}}>
-            <Avatar alt={pokemon.name} src={pokemon.sprites.front_shiny}/>
-            <Typography variant="h3">{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</Typography>
-            </div>
-            <Typography variant="body2">Weight: {pokemon.weight}, Height: {pokemon.height}</Typography>
-        </Container>
-    )
+    if (pokemon) {
+
+        const { name, height, weight, sprites, types, forms, abilities, moves } = pokemon
+
+        let newHeight, newWeight
+        
+                if (weight >= 10) {
+                    newWeight = `${weight / 10} kg`
+                } else {
+                    newWeight = `${weight * 100} gr`
+                }
+
+        if (height >= 10) {
+            newHeight = `${height / 10} m`
+        } else {
+            newHeight = `${height * 10} cm`
+        }
+            
+        return (
+            <Container>
+                {alert && <AlertMsg msg={alertmsg}/>}
+                <section style={{display: 'flex', marginBottom: '20px'}}>
+                    <Avatar alt={name} src={sprites.front_shiny} style={{ height: '100px', width: '120px', marginRight: '10px' }}/>
+                    <div style={{width: '100%', alignItems: 'flex-end'}}>
+                        <Typography variant="h3">{name.charAt(0).toUpperCase() + name.slice(1)}</Typography>
+                        <hr />
+                    </div>
+                </section>
+                <Grid container spacing={5}>
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Typography variant="h5">Size</Typography>
+                        <hr />
+                        <Typography variant="subtitle1">Weight: {newWeight}</Typography>
+                        <Typography variant="subtitle1">Height: {newHeight}</Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Typography variant="h5">{types.length > 1 ? "Types" : "Type"}</Typography>
+                        <hr />
+                        {types.map((elm, idx) => <Typography key={idx} variant="subtitle1">{elm.type.name.charAt(0).toUpperCase() + elm.type.name.slice(1)}</Typography>)}
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Typography variant="h5">{forms.length > 1 ? "Forms" : "Form"}</Typography>
+                        <hr />
+                        {forms.map((elm, idx) => <Typography key={idx} variant="subtitle1">{elm.name.charAt(0).toUpperCase() + elm.name.slice(1)}</Typography>)}
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Typography variant="h5">{abilities.length > 1 ? "Abilities" : "Abilitiy"}</Typography>
+                        <hr />
+                        {abilities.map((elm, idx) => <Typography key={idx} variant="subtitle1">{elm.ability.name.charAt(0).toUpperCase() + elm.ability.name.slice(1)} | {elm.is_hidden ? "Hidden ability" : "Visible ability"}</Typography>)}
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={12}>
+                        <Typography variant="h5">{moves.length > 1 ? "Moves" : "Move"}</Typography>
+                        <hr />
+                        <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                            {moves.map((elm, idx) => <Typography key={idx} variant="subtitle1" style={{paddingRight: '20px'}}>{elm.move.name.charAt(0).toUpperCase() + elm.move.name.slice(1)}</Typography>)}
+                        </div>
+                    </Grid>
+                </Grid>
+            </Container>
+        )
+    }
 }
 
 export default PokemonDetails

@@ -21,7 +21,7 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/" component={PokemonsList} />
-            <Route exact path="/pokemon/:id" render={props => <PokemonDetails {...props}/>} />
+            <Route exact path="/pokemon/:name" render={props => <PokemonDetails {...props}/>} />
             <Route exact path="/generations" component={Generations} />
             <Route exact path="/evolutions" component={Evolutions} />
           </Switch>
