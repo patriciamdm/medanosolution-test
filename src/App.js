@@ -8,26 +8,30 @@ import Footer from './components/layout/Footer'
 
 import PokemonsList from './components/content/pokemons/Pokemons-list'
 import PokemonDetails from './components/content/pokemons/Pokemon-dets'
-import Generations from './components/content/Generations'
-import Evolutions from './components/content/Evolutions'
+import Extras from './components/content/extras/Extras'
+import About from './components/content/extras/About'
 
 import PokemonState from './context/pokemons/pokemonState'
+import ExtrasState from './context/extras/extrasState'
+
 
 function App() {
   return (
     <PokemonState>
-      <Router>
-        <Navigation />
-        <main>
-          <Switch>
-            <Route exact path="/" component={PokemonsList} />
-            <Route exact path="/pokemon/:name" render={props => <PokemonDetails {...props}/>} />
-            <Route exact path="/generations" component={Generations} />
-            <Route exact path="/evolutions" component={Evolutions} />
-          </Switch>
-        </main>
-        <Footer />
-      </Router>
+      <ExtrasState>
+        <Router>
+          <Navigation />
+          <main>
+            <Switch>
+              <Route exact path="/" component={PokemonsList} />
+              <Route exact path="/pokemon/:name" render={props => <PokemonDetails {...props}/>} />
+              <Route exact path="/contests" component={Extras} />
+              <Route exact path="/about" component={About} />
+            </Switch>
+          </main>
+          <Footer />
+        </Router>
+      </ExtrasState>
     </PokemonState>
   );
 }

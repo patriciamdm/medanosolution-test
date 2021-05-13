@@ -24,9 +24,9 @@ const Navigation = () => {
             </AppBar>
             <Drawer anchor="left" open={drawer} onClose={handleClose}>
                 <List>
-                    <ListItem><Link to="/" onClick={handleClose} className="link-edit">Pokemons</Link></ListItem>    
-                    <ListItem><Link to="/generations" onClick={handleClose} className="link-edit">Generations</Link></ListItem>    
-                    <ListItem><Link to="/evolutions" onClick={handleClose} className="link-edit">Evolutions</Link></ListItem>    
+                    <ListItem><Link to="/" onClick={handleClose} className="link-edit">Pokemons</Link></ListItem>
+                    <ListItem><Link to="/contests" onClick={handleClose} className="link-edit">Contests</Link></ListItem>
+                    <ListItem><Link to="/about" onClick={handleClose} className="link-edit">About</Link></ListItem>
                 </List>
             </Drawer>
         </>
