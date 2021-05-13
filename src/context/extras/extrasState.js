@@ -1,11 +1,11 @@
 import React, { useReducer } from 'react'
 
-import ExtrasContext from './extrasContext'
-import ExtrasReducer from './extrasReducer'
+import ExtrasContext from './extrasContext.js'
+import ExtrasReducer from './extrasReducer.js'
 
 import { GET_CONTESTS, API_ERROR } from '../../types'
 
-import apiHandler from '../../services/api.service'
+import apiHandler from '../../services/api.service.js'
 
 
 const ExtrasState = props => {

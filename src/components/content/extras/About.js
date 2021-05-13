@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Typography, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 
 const About = () => {

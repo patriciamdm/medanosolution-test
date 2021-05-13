@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, Typography, Avatar, Grid } from '@material-ui/core';
 
-import PokemonContext from '../../../context/pokemons/pokemonContext'
+import PokemonContext from '../../../context/pokemons/pokemonContext.js'
 
-import AlertMsg from '../../layout/Alert'
+import AlertMsg from '../../layout/Alert.js'
 
 
 const PokemonDetails = (props) => {

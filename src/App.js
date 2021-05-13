@@ -3,16 +3,16 @@ import './App.css'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Navigation from './components/layout/Navigation'
-import Footer from './components/layout/Footer'
+import Navigation from './components/layout/Navigation.js'
+import Footer from './components/layout/Footer.js'
 
-import PokemonsList from './components/content/pokemons/Pokemons-list'
-import PokemonDetails from './components/content/pokemons/Pokemon-dets'
-import Extras from './components/content/extras/Extras'
-import About from './components/content/extras/About'
+import PokemonsList from './components/content/pokemons/Pokemons-list.js'
+import PokemonDetails from './components/content/pokemons/Pokemon-dets.js'
+import Extras from './components/content/extras/Extras.js'
+import About from './components/content/extras/About.js'
 
-import PokemonState from './context/pokemons/pokemonState'
-import ExtrasState from './context/extras/extrasState'
+import PokemonState from './context/pokemons/pokemonState.js'
+import ExtrasState from './context/extras/extrasState.js'
 
 
 function App() {

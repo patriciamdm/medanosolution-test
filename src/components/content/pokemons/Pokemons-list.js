@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Container, Grid, Typography } from '@material-ui/core'
 
-import PokemonContext from '../../../context/pokemons/pokemonContext'
+import PokemonContext from '../../../context/pokemons/pokemonContext.js'
 
-import PokemonCard from './Pokemon-card'
-import AlertMsg from '../../layout/Alert'
-import SearchBar from '../../layout/Search-bar'
-import Pager from '../../layout/Pager'
+import PokemonCard from './Pokemon-card.js'
+import AlertMsg from '../../layout/Alert.js'
+import SearchBar from '../../layout/Search-bar.js'
+import Pager from '../../layout/Pager.js'
 
 
 const PokemonsList = () => {

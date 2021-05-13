@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Container, Grid, Typography, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import ExtrasContext from '../../../context/extras/extrasContext'
+import ExtrasContext from '../../../context/extras/extrasContext.js'
 
-import AlertMsg from '../../layout/Alert'
-import ExtraCard from './ExtraCard'
+import AlertMsg from '../../layout/Alert.js'
+import ExtraCard from './ExtraCard.js'
 
 
 const Extras = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { ButtonGroup, Button } from '@material-ui/core'
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 
 
 const Pager = ({ changePage, next, previous }) => {

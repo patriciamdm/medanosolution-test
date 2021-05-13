@@ -1,11 +1,11 @@
 import React, { useReducer } from 'react'
 
-import PokemonContext from './pokemonContext'
-import PokemonReducer from './pokemonReducer'
+import PokemonContext from './pokemonContext.js'
+import PokemonReducer from './pokemonReducer.js'
 
 import { GET_ONEPOKEMON, GET_POKEMONS, API_ERROR } from '../../types'
 
-import apiHandler from '../../services/api.service'
+import apiHandler from '../../services/api.service.js'
 
 
 const PokemonState = props => {
